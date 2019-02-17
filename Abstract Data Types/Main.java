@@ -80,7 +80,7 @@ public class Main {
          System.out.println();
          System.out.println(testPal +"  is palindrome?  "+ isPalindrome(testPal));
          
-         testPal="Madam, I’m Adam";
+         testPal="Madam, Iâ€™m Adam";
          System.out.println();
          System.out.println(testPal +"  is palindrome?  "+ isPalindrome(testPal));
          
