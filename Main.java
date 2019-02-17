@@ -1,94 +1,98 @@
-/**
- * Main class of the Java program. 
- * 
- */
+// Main class of the Java program. 
+ 
+import java.math.BigInteger;
 
 public class Main {
-    public static boolean isPrime(int n) {
-        //your implementation goes here
-    	for (int i=2; i<=n/2; i++) {
-    		if (n%i==0) {
-    			return false;
-    		}
-    	}
-		return true;
+    static int countRec=0, countIter=0;
+    
+    public static BigInteger facRec(int n) {
+        //your implementation goes here 
+    	
+    	//First you declare the BigInteger number you will be using
+    	BigInteger number = BigInteger.valueOf(n);
+    	
+    	//Then, if the attribute n given by the facRec call is equal to 0 stop the counter, display the value
+    	//and return the value of 1
+		if (n == 0) {  								
+			System.out.println("Counter for Recursive: " + countRec);
+			countRec = 0;
+    		 return BigInteger.valueOf(1);}
+		
+		//else, if the attribute n given is not 0, then increase the counter because we are going to call
+		//this same function again and then
+		//return the number multiplied by the result from the function giving the n minus one as an attribute
+		//This will stop until we reach the 0 value in n
+    	else
+    		//System.out.println("In this iteration the value of number is: " + number);
+			countRec++;
+    		 return number.multiply(facRec(n-1));
     }
     
-    public static int nextPrime(int n) {
-        //your implementation goes here
-    	boolean Prime = isPrime(n);
-    	if (Prime) {
-    		return n;
-    	}
-    	else {
-    		n++;
-    		return nextPrime(n);
-    	}
-    }
-    
-    public static int median(int a, int b, int c) {
-        //your implementation goes here
-    	if ((a<=b && a>=c)|| (a>=b && a<=c)) {
-    		return a;
-    	}
-    	else if ((b<=a && b>=c)|| (b>=a && b<=c)) {
-    		return b;
-    	}
-    	else {
-    		return c;
-    	}
-    }
-    
-    public static int median2(int a, int b, int c) {
-        //your implementation goes here
-    	int media;
-    	media = (a+b+c) - Math.min(Math.min(a, b), c) - Math.max(Math.max(a, b), c);
-    	return media;
-    }
-   
-    public static int[] createRandom (int n)  {
-        //your implementation goes here
-    	int [] randomArray = new int[n];
-    	for (int i=0; i<n; i++) {
-    		randomArray[i] = 5 + (int)(Math.random() * ((94) + 1));
-    	}
-    	return randomArray;
-    }
-
-    public static String toString (int[] a) {
-        //your implementation goes here
-    	String stringArray="[";
-    	for (int i=0;i<a.length-1;i++) {
-    		stringArray = stringArray + Integer.toString(a[i]) + ", ";
-    	}
-    	stringArray= stringArray + Integer.toString(a[a.length-1]) + "]";
-    	return stringArray;
-    }
-    
-    public static int posMin (int[] a) {
-        //your implementation goes here
-    	int position=0, currentNum=a[0];
-    	for (int i=0; i<a.length-1;i++) {
-    		if(currentNum>a[i+1]) {
-    			currentNum = a[i+1];
-    			position=i+1;
-    		}
-    	}
-    	return position;
-    }
-    
-    public static void swap (int[] a) {
-        //your implementation goes here
-    	int temp = a[0];
-    	a[0] = a[a.length-1];
-    	a[a.length-1] = temp;
+    public static BigInteger facIter(int n) {
+        //your implementation goes here   
+    	 BigInteger Num=BigInteger.valueOf(1);
+    	 for (int i=1; i<=n; i++) {
+    		 countIter++;
+    		 Num=Num.multiply(BigInteger.valueOf(i));
+    	 }
+    	 System.out.println("Counter for Iterative: " + countIter);
+    	 countIter =0;
+    	 return Num;
     }
 
     public static void main(String[] args) {
-        //test your methods here
-    	int [] a = new int[] {9,5,4,8,4};
-    	int t=posMin(a);
-    	System.out.println(t);
+        //test your implementation here (also for classes Food and Clock)
+    	//test for Main
+    	// Test for the first 15!
+    	 for (int i=0; i<=15;i++) {
+    		 System.out.println(facRec(i));
+    	}
+    	BigInteger x;
+    	x=facRec(23);
+    	System.out.println(x);
+    	BigInteger y;
+    	y=facIter(23);
+    	System.out.println(y);
+   	
+    	//Test for Clock 
+    	Clock r=new Clock(13,8);
+    	Clock y1 = new Clock(15,6);
+    	String test = r.toString();
+    	System.out.println(test);
+    	r=r.add(26);
+    	System.out.println(r);
+    	y1=r.add(r);
+    	System.out.println(y1);
+    	System.out.println(r);
+    	
+    	Clock r1=new Clock(20,20);
+    	Clock y12 = new Clock(12,8);
+    	String test1 = r1.toString();
+    	System.out.println(test1);
+    	r1=r1.add(30);
+    	System.out.println(r1);
+    	y12=r.add(r1);
+    	System.out.println(y12);
+    	System.out.println(r1);
+    	
+    	Clock r12=new Clock(14,27);
+    	Clock y123 = new Clock(19,40);
+    	String test12 = r12.toString();
+    	System.out.println(test12);
+    	r12=r12.add(50);
+    	System.out.println(r12);
+    	y123=r.add(r12);
+    	System.out.println(y123);
+    	System.out.println(r12);
+
+    	//Test for Food
+    	
+    	Food[] testfood = new Food[]{};
+    	testfood =Food.createSortedRandomList();
+    	for (int i=0;i<testfood.length;i++) {
+    		System.out.println(testfood[i]);
+    }
     }
 }
+
 
